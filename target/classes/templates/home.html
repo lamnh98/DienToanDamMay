@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+<meta charset="utf-8"></meta>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+<title>Home</title>
+
+<!-- Google font -->
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito+Sans:700%7CNunito:300,600"
+	th:href="@{https://fonts.googleapis.com/css?family=Nunito+Sans:700%7CNunito:300,600}"
+	rel="stylesheet"></link>
+
+<!-- Bootstrap -->
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"
+	th:href="@{/css/bootstrap.min.css}"></link>
+
+<!-- Font Awesome Icon -->
+<link rel="stylesheet" href="css/font-awesome.min.css"
+	th:href="@{/css/font-awesome.min.css}"></link>
+
+<!-- Custom stlylesheet -->
+<link type="text/css" rel="stylesheet" href="css/style.css"
+	th:href="@{/css/style.css}"></link>
+
+
+
+</head>
+<body>
+
+	<!-- Header -->
+	<header th:fragment="header" id="header">
+		<!-- Nav -->
+		<div id="nav">
+			<!-- Main Nav -->
+			<div id="nav-fixed">
+				<div class="container">
+					<!-- logo -->
+					<div class="nav-logo">
+						<a th:href="@{/home}" class="logo"><img
+							th:src="@{/img/logo.png}" alt=""></img></a>
+					</div>
+					<!-- /logo -->
+					<!-- nav -->
+					<ul class="nav-menu nav navbar-nav"
+						th:each="loaitin,iterStat : ${loaitinlist}">
+						<li class="cat-1"><a
+							th:href="@{/home/{id}(id=${loaitin.id})}"
+							th:text="${loaitin.tenloai}"></a></li>
+
+					</ul>
+
+					<!-- search & aside toggle -->
+					<div class="nav-btns">
+						<a th:href="@{/login}">
+						<button   class="user-btn">
+						
+							<i class="fa fa-user"></i> Login		
+					</button>
+						</a>
+					</div>
+					<!-- /search & aside toggle -->
+				</div>
+			</div>
+			<!-- /Main Nav -->
+
+
+		</div>
+		<!-- /Nav -->
+	</header>
+	<!-- /Header -->
+
+	<!-- section -->
+	<div class="section">
+		<!-- container -->
+		<div class="container">
+			<!-- row -->
+			<div class="row">
+				<div class="col-md-12">
+					<div class="section-title">
+						<h2>Tin Mới</h2>
+					</div>
+				</div>
+
+				<!-- post -->
+				<div th:each="tintuc,iterStat : ${tintuclist}" class="col-md-4">
+					<div class="post">
+						<a class="post-img" th:href="@{/noidung/{id}(id=${tintuc.id})}"><img th:src="${tintuc.hinhAnh}" alt=""></img></a>
+						<div class="post-body">
+							<div class="post-meta">
+								<a class="post-category cat-1"
+									th:href="@{/home/{id}(id=${tintuc.loaitin.id})}"
+									th:text="${tintuc.loaitin.tenloai}"></a> 
+							</div>
+							<h3 class="post-title" >
+								<a th:href="@{/noidung/{id}(id=${tintuc.id})}" th:text="${tintuc.tieuDe}"></a>
+							</h3>
+						</div>
+					</div>
+				</div>
+				<!-- /post -->
+
+
+			</div>
+			<!-- /row -->
+		</div>
+		<!-- /container -->
+	</div>
+	<!-- /section -->
+
+
+
+	<!-- jQuery Plugins -->
+	<script src="js/jquery.min.js" th:src="@{js/jquery.min.js}"></script>
+	<script src="js/bootstrap.min.js" th:src="@{js/bootstrap.min.js}"></script>
+	<script src="js/main.js" th:src="@{js/main.js}"></script>
+
+</body>
+</html>

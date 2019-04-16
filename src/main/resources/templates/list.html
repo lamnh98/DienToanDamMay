@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head"></head>
+<body>
+	<nav th:replace="layout :: header"></nav>
+
+	<div class="container main-content list">
+		<div th:if="${success}"
+			class="row alert alert-success alert-dismissible">
+			<button type="button" class="close" data-dismiss="alert"
+				aria-label="Close">
+				<span aria-hidden="true">×</span>
+			</button>
+			
+		</div>
+		<div class="row">
+			<a th:href="@{/admin/create}" class="btn btn-success pull-left">
+				<span class="glyphicon glyphicon-plus"></span> Add new employee
+			</a>
+			
+		</div>
+		<th:block th:if="${#lists.isEmpty(tintuclist)}">
+			<h3>No News</h3>
+		</th:block>
+
+		<th:block th:unless="${#lists.isEmpty(tintuclist)}">
+			<div class="row">
+				<table class="table table-bordered table-hover">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Tiêu Đề</th>
+							<th>Chủ Đề</th>													
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="contact,iterStat : ${tintuclist}">
+							<td th:text="${iterStat.count}"></td>
+							<td th:text="${contact.tieuDe}"></td>		
+							<td th:text="${contact.loaitin.tenloai}"></td>												
+							<td><a th:href="@{/admin/{id}/edit(id=${contact.id})}"><span
+									class="glyphicon glyphicon-pencil"></span></a></td>
+							<td><a th:href="@{/admin/{id}/delete(id=${contact.id})}"><span
+									class="glyphicon glyphicon-trash"></span></a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</th:block>
+	</div>
+	<!-- /.container -->
+
+	
+</body>
+</html>
